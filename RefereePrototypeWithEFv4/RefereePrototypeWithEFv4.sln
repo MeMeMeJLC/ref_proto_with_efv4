@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefereePrototypeWithEFv4", "RefereePrototypeWithEFv4\RefereePrototypeWithEFv4.csproj", "{A05DF16A-71B7-45EF-B037-0EE5484D357E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{95449F82-56BD-4334-99AB-87AD98ED10CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{EF6396AC-AB3D-4A32-93C3-B933E74E0D71}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{6DB1CB76-FEF0-4CB5-AE84-26A58782453D}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\RefereePrototypeWithEFv4.json = PublishScripts\Templates\RefereePrototypeWithEFv4.json
+		PublishScripts\Templates\RefereePrototypeWithEFv4.param.dev.json = PublishScripts\Templates\RefereePrototypeWithEFv4.param.dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A05DF16A-71B7-45EF-B037-0EE5484D357E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A05DF16A-71B7-45EF-B037-0EE5484D357E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A05DF16A-71B7-45EF-B037-0EE5484D357E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A05DF16A-71B7-45EF-B037-0EE5484D357E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF6396AC-AB3D-4A32-93C3-B933E74E0D71} = {95449F82-56BD-4334-99AB-87AD98ED10CD}
+		{6DB1CB76-FEF0-4CB5-AE84-26A58782453D} = {95449F82-56BD-4334-99AB-87AD98ED10CD}
+	EndGlobalSection
+EndGlobal
