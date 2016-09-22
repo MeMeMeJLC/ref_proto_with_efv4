@@ -9,6 +9,6 @@ namespace RefereePrototypeWithEFv4.Models
     {
         public int Id { get; set; }
         public DateTime GameDateTime { get; set; }
-        public ICollection<GamePlayer> GamePlayers { get; set; }
+        //public ICollection<GamePlayer> GamePlayers { get; set; }
     }
 }

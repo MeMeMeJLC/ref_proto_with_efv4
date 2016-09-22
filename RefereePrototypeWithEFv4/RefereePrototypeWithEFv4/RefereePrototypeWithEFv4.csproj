@@ -25,7 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <ApplicationInsightsResourceId />
+    <ApplicationInsightsResourceId>/subscriptions/33064a16-0403-49a0-a889-f99956fbae78/resourcegroups/prototype-ref-app/providers/microsoft.insights/components/RefereePrototypeWithEFv4</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +71,10 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights.TraceListener, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.TraceListener.2.1.0\lib\net45\Microsoft.ApplicationInsights.TraceListener.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -235,19 +239,56 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameIncidentsController.cs" />
+    <Compile Include="Controllers\GamePlayersController.cs" />
+    <Compile Include="Controllers\GamesController.cs" />
+    <Compile Include="Controllers\GoalsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SubstitutionsController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="ErrorHandler\AiHandleErrorAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609220839073_InitialCreate.cs" />
+    <Compile Include="Migrations\201609220839073_InitialCreate.Designer.cs">
+      <DependentUpon>201609220839073_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220845459_initial.cs" />
+    <Compile Include="Migrations\201609220845459_initial.Designer.cs">
+      <DependentUpon>201609220845459_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220904596_initial1.cs" />
+    <Compile Include="Migrations\201609220904596_initial1.Designer.cs">
+      <DependentUpon>201609220904596_initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220909111_initial2.cs" />
+    <Compile Include="Migrations\201609220909111_initial2.Designer.cs">
+      <DependentUpon>201609220909111_initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220918143_initial3.cs" />
+    <Compile Include="Migrations\201609220918143_initial3.Designer.cs">
+      <DependentUpon>201609220918143_initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609220921146_initial4.cs" />
+    <Compile Include="Migrations\201609220921146_initial4.Designer.cs">
+      <DependentUpon>201609220921146_initial4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameIncident.cs" />
+    <Compile Include="Models\GameIncidentDTO.cs" />
     <Compile Include="Models\GamePlayer.cs" />
+    <Compile Include="Models\GamePlayerDTO.cs" />
     <Compile Include="Models\Goal.cs" />
+    <Compile Include="Models\GoalDTO.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\RefereePrototypeWithEFv4Context.cs" />
     <Compile Include="Models\Substitution.cs" />
+    <Compile Include="Models\SubstitutionDTO.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -327,6 +368,26 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609220839073_InitialCreate.resx">
+      <DependentUpon>201609220839073_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220845459_initial.resx">
+      <DependentUpon>201609220845459_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220904596_initial1.resx">
+      <DependentUpon>201609220904596_initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220909111_initial2.resx">
+      <DependentUpon>201609220909111_initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220918143_initial3.resx">
+      <DependentUpon>201609220918143_initial3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609220921146_initial4.resx">
+      <DependentUpon>201609220921146_initial4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

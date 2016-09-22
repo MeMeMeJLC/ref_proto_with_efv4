@@ -20,5 +20,12 @@ namespace RefereePrototypeWithEFv4.Models
         public int TeamId { get; set; }
         //navigation property
         public Team Team { get; set; }
+        //foreign key
+        public int GameId { get; set; }
+        //navigation property
+        public Game Game { get; set; }
+        /*public ICollection<Goal> Goals { get; set; }
+        public ICollection<GameIncident> GameIncidents { get; set; }
+        public ICollection<Substitution> Substitutions { get; set; }*/
     }
 }
