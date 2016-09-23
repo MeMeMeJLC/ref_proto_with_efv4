@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201609220921146_initial4.Designer.cs">
       <DependentUpon>201609220921146_initial4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609231124363_initial5.cs" />
+    <Compile Include="Migrations\201609231124363_initial5.Designer.cs">
+      <DependentUpon>201609231124363_initial5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -326,6 +330,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\refappprototype.pubxml" />
     <None Include="Properties\PublishProfiles\RefereePrototypeWithEFv4.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -338,7 +343,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -354,6 +361,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Home\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609220921146_initial4.resx">
       <DependentUpon>201609220921146_initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609231124363_initial5.resx">
+      <DependentUpon>201609231124363_initial5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

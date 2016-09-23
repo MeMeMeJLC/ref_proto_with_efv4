@@ -27,7 +27,8 @@ namespace RefereePrototypeWithEFv4.Controllers
                                   IncidentType = g.IncidentType,
                                   IncidentTime = g.IncidentTime,
                                   GamePlayerFirstName = g.GamePlayer.FirstName,
-                                  GamePlayerLastName = g.GamePlayer.LastName
+                                  GamePlayerLastName = g.GamePlayer.LastName,
+                                  TeamName = g.GamePlayer.Team.Name
                               };
             return gameIncidents;
         }

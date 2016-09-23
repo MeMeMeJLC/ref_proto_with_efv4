@@ -12,7 +12,6 @@ namespace RefereePrototypeWithEFv4.Models
         public TimeSpan IncidentTime { get; set; }
 
 
-
         public int GamePlayerId { get; set; }
         public GamePlayer GamePlayer { get; set; }
     }

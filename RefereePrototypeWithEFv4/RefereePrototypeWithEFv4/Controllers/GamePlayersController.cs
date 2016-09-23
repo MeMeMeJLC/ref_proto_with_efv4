@@ -26,6 +26,9 @@ namespace RefereePrototypeWithEFv4.Controllers
                                   Id = g.Id,
                                   FirstName = g.FirstName,
                                   LastName = g.LastName,
+
+                                  IsCaptain = g.IsCaptain,
+                                  IsStartingSubstitute = g.IsStartingSubstitute,
                                   TeamName = g.Team.Name,
                                   GameId = g.GameId
                               };
