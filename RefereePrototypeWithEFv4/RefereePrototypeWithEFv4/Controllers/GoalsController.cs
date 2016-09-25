@@ -54,7 +54,8 @@ namespace RefereePrototypeWithEFv4.Controllers
                             TimeScored = g.TimeScored,
                             GamePlayerFirstName = g.GamePlayer.FirstName,
                             GamePlayerLastName = g.GamePlayer.LastName,
-                            TeamName = g.GamePlayer.Team.Name
+                            TeamName = g.GamePlayer.Team.Name,
+                            GameId = g.GamePlayer.GameId
                         };
 
             foreach (var item in goals)
@@ -82,7 +83,7 @@ namespace RefereePrototypeWithEFv4.Controllers
                     {
                         teamTwoGoals += 1;
                     }
-                    else if (teamTwoName == item.TeamName && item.IsOwnGoal == false)
+                    else if (teamTwoName == item.TeamName && item.IsOwnGoal == true)
                     {
                         teamOneGoals += 1;
                     }
@@ -98,7 +99,6 @@ namespace RefereePrototypeWithEFv4.Controllers
                 TeamTwoGoals = teamTwoGoals
             };
 
-            //var scoreJson = new JsonSerializer().Serialize(scores);
             return scores;
 
         }
@@ -110,6 +110,7 @@ namespace RefereePrototypeWithEFv4.Controllers
             public string TeamTwoName;
             public int TeamTwoGoals;
         }
+
 
         // GET: api/Goals/5
         [ResponseType(typeof(GoalDTO))]

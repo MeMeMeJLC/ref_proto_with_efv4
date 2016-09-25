@@ -36,6 +36,34 @@ namespace RefereePrototypeWithEFv4.Controllers
             return gamePlayers;
         }
 
+        public  List<GamePlayerDTO> GetGamePlayersByGameId(int gameId)
+        {
+            var gamePlayers = from g in db.GamePlayers
+                              select new GamePlayerDTO()
+                              {
+                                  Id = g.Id,
+                                  FirstName = g.FirstName,
+                                  LastName = g.LastName,
+
+                                  IsCaptain = g.IsCaptain,
+                                  IsStartingSubstitute = g.IsStartingSubstitute,
+                                  TeamName = g.Team.Name,
+                                  GameId = g.GameId
+                              };
+
+            List<GamePlayerDTO> gamePlayersByGameId = new List<GamePlayerDTO>();
+
+            foreach (var item in gamePlayers)
+            {
+                if (gameId == item.GameId)
+                {
+                    gamePlayersByGameId.Add(item);
+                }
+            }
+
+                        return gamePlayersByGameId;
+        }
+
         // GET: api/GamePlayers/5
         [ResponseType(typeof(GamePlayerDTO))]
         public async Task<IHttpActionResult> GetGamePlayer(int id)
