@@ -29,6 +29,7 @@ namespace RefereePrototypeWithEFv4.Controllers
 
                                   IsCaptain = g.IsCaptain,
                                   IsStartingSubstitute = g.IsStartingSubstitute,
+                                  TeamId = g.Team.Id,
                                   TeamName = g.Team.Name,
                                   GameId = g.GameId
                               };
@@ -47,6 +48,7 @@ namespace RefereePrototypeWithEFv4.Controllers
 
                                   IsCaptain = g.IsCaptain,
                                   IsStartingSubstitute = g.IsStartingSubstitute,
+                                  TeamId = g.Team.Id,
                                   TeamName = g.Team.Name,
                                   GameId = g.GameId
                               };
@@ -64,6 +66,35 @@ namespace RefereePrototypeWithEFv4.Controllers
                         return gamePlayersByGameId;
         }
 
+        public List<GamePlayerDTO> GetGamePlayersByTeamId(int teamId)
+        {
+            var gamePlayers = from g in db.GamePlayers
+                              select new GamePlayerDTO()
+                              {
+                                  Id = g.Id,
+                                  FirstName = g.FirstName,
+                                  LastName = g.LastName,
+
+                                  IsCaptain = g.IsCaptain,
+                                  IsStartingSubstitute = g.IsStartingSubstitute,
+                                  TeamId = g.Team.Id,
+                                  TeamName = g.Team.Name,
+                                  GameId = g.GameId
+                              };
+
+            List<GamePlayerDTO> gamePlayersByTeamId = new List<GamePlayerDTO>();
+
+            foreach (var item in gamePlayers)
+            {
+                if (teamId == item.TeamId)
+                {
+                    gamePlayersByTeamId.Add(item);
+                }
+            }
+
+            return gamePlayersByTeamId;
+        }
+
         // GET: api/GamePlayers/5
         [ResponseType(typeof(GamePlayerDTO))]
         public async Task<IHttpActionResult> GetGamePlayer(int id)
@@ -77,6 +108,7 @@ namespace RefereePrototypeWithEFv4.Controllers
                  LastName = b.LastName,
                  IsCaptain = b.IsCaptain,
                  IsStartingSubstitute = b.IsStartingSubstitute,
+                 TeamId = b.Team.Id,
                  TeamName = b.Team.Name,
                  GameId = b.GameId
              }).SingleOrDefaultAsync(b => b.Id == id);
