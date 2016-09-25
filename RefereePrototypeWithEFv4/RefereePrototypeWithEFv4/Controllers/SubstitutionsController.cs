@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RefereePrototypeWithEFv4.Models;
+using System.Net.Http.Headers;
 
 namespace RefereePrototypeWithEFv4.Controllers
 {
@@ -25,36 +26,113 @@ namespace RefereePrototypeWithEFv4.Controllers
                                 {
                                     Id = g.Id,
                                     SubstitutionTime = g.SubstitutionTime,
+
                                     GamePlayerGoingOffId = g.GamePlayerGoingOffId,
                                     GamePlayerGoingOffFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerGoingOffLastName = g.GamePlayer.FirstName,
+                                    GamePlayerGoingOffLastName = g.GamePlayer.LastName,
                                     GamePlayerGoingOnId = g.GamePlayerGoingOnId,
                                     GamePlayerGoingOnFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerGoingOnLastName = g.GamePlayer.FirstName,
+                                    GamePlayerGoingOnLastName = g.GamePlayer.LastName,
 
-
+                                    GameId = g.GamePlayer.GameId,
                                     TeamName = g.GamePlayer.Team.Name
                                 };
             return substitutions;
+        }
+
+        public async Task<List<SubstitutionDTO>> GetSubstitutionsByGameId(int gameId)
+        {
+            var substitutions = from g in db.Substitutions
+                                select new SubstitutionDTO()
+                                {
+                                    Id = g.Id,
+                                    SubstitutionTime = g.SubstitutionTime,
+
+                                    GamePlayerGoingOffId = g.GamePlayerGoingOffId,
+                                    GamePlayerGoingOnId = g.GamePlayerGoingOnId,
+
+                                    TeamName = g.GamePlayer.Team.Name,
+                                    GameId = g.GamePlayer.GameId
+                                };
+
+            foreach (var item in substitutions)
+            {
+                HttpClient GoingOnClient = new HttpClient();
+                HttpResponseMessage GoingOnResponse = await GoingOnClient.GetAsync("http://localhost:64553/api/gameplayers/" + item.GamePlayerGoingOnId);
+                if (GoingOnResponse.IsSuccessStatusCode)
+                {
+                    GamePlayer goingOnPlayer = await GoingOnResponse.Content.ReadAsAsync<GamePlayer>();
+                    item.GamePlayerGoingOnFirstName = goingOnPlayer.FirstName;
+                    item.GamePlayerGoingOnLastName = goingOnPlayer.LastName;
+
+                }
+
+                HttpClient GoingOffClient = new HttpClient();
+                HttpResponseMessage GoingOffResponse = await GoingOffClient.GetAsync("http://localhost:64553/api/gameplayers/" + item.GamePlayerGoingOffId);
+                if (GoingOffResponse.IsSuccessStatusCode)
+                {
+                    GamePlayer goingOffPlayer = await GoingOffResponse.Content.ReadAsAsync<GamePlayer>();
+                    item.GamePlayerGoingOffFirstName = goingOffPlayer.FirstName;
+                    item.GamePlayerGoingOffLastName = goingOffPlayer.LastName;
+
+                }
+            }
+
+
+            List<SubstitutionDTO> substitutionsByGameId = new List<SubstitutionDTO>();
+
+            foreach (var item in substitutions)
+            {
+                if (gameId == item.GameId)
+                {
+                    substitutionsByGameId.Add(item);
+                }
+            }
+
+            return substitutionsByGameId;
         }
 
         // GET: api/Substitutions/5
         [ResponseType(typeof(SubstitutionDTO))]
         public async Task<IHttpActionResult> GetSubstitution(int id)
         {
+
             var substitution = await db.Substitutions.Include(b => b.GamePlayer).Select(b =>
             new SubstitutionDTO()
             {
                 Id = b.Id,
                 SubstitutionTime = b.SubstitutionTime,
+
                 GamePlayerGoingOffId = b.GamePlayerGoingOffId,
                 GamePlayerGoingOffFirstName = b.GamePlayer.FirstName,
                 GamePlayerGoingOffLastName = b.GamePlayer.LastName,
+
                 GamePlayerGoingOnId = b.GamePlayerGoingOnId,
                 GamePlayerGoingOnFirstName = b.GamePlayer.FirstName,
                 GamePlayerGoingOnLastName = b.GamePlayer.LastName,
+
                 TeamName = b.GamePlayer.Team.Name
             }).SingleOrDefaultAsync(b => b.Id == id);
+
+            HttpClient GoingOnClient = new HttpClient();
+            HttpResponseMessage GoingOnResponse = await GoingOnClient.GetAsync("http://localhost:64553/api/gameplayers/" + substitution.GamePlayerGoingOnId);
+            if (GoingOnResponse.IsSuccessStatusCode)
+            {
+                GamePlayer goingOnPlayer = await GoingOnResponse.Content.ReadAsAsync<GamePlayer>();
+                substitution.GamePlayerGoingOnFirstName = goingOnPlayer.FirstName;
+                substitution.GamePlayerGoingOnLastName = goingOnPlayer.LastName;
+
+            }
+
+            HttpClient GoingOffClient = new HttpClient();
+            HttpResponseMessage GoingOffResponse = await GoingOffClient.GetAsync("http://localhost:64553/api/gameplayers/" + substitution.GamePlayerGoingOffId);
+            if (GoingOffResponse.IsSuccessStatusCode)
+            {
+                GamePlayer goingOffPlayer = await GoingOffResponse.Content.ReadAsAsync<GamePlayer>();
+                substitution.GamePlayerGoingOffFirstName = goingOffPlayer.FirstName;
+                substitution.GamePlayerGoingOffLastName = goingOffPlayer.LastName;
+
+            }
 
             if (substitution == null)
             {
@@ -120,11 +198,9 @@ namespace RefereePrototypeWithEFv4.Controllers
                 Id = substitution.Id,
                 SubstitutionTime = substitution.SubstitutionTime,
                 GamePlayerGoingOffId = substitution.GamePlayerGoingOffId,
-                GamePlayerGoingOffFirstName = substitution.GamePlayer.FirstName,
-                GamePlayerGoingOffLastName = substitution.GamePlayer.LastName,
+
                 GamePlayerGoingOnId = substitution.GamePlayerGoingOnId,
-                GamePlayerGoingOnFirstName = substitution.GamePlayer.FirstName,
-                GamePlayerGoingOnLastName = substitution.GamePlayer.LastName,
+
                 TeamName = substitution.GamePlayer.Team.Name
             };
 
