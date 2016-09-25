@@ -13,6 +13,7 @@ namespace RefereePrototypeWithEFv4.Models
         public string GamePlayerFirstName { get; set; }
         public string GamePlayerLastName { get; set; }
         public string TeamName { get; set; }
+        public int GameId { get; set; }
  
     }
 }

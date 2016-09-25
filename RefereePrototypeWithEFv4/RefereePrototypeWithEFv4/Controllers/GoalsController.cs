@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using RefereePrototypeWithEFv4.Models;
+using System.Collections;
+using System.Data.SqlClient;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace RefereePrototypeWithEFv4.Controllers
 {
@@ -21,17 +25,90 @@ namespace RefereePrototypeWithEFv4.Controllers
         public IQueryable<GoalDTO> GetGoals()
         {
             var goals = from g in db.Goals
-                              select new GoalDTO()
-                              {
-                                  Id = g.Id,
-                                  IsOwnGoal = g.IsOwnGoal,
-                                  TimeScored = g.TimeScored,
-                                  GamePlayerFirstName = g.GamePlayer.FirstName,
-                                  GamePlayerLastName = g.GamePlayer.LastName,
-                                  TeamName = g.GamePlayer.Team.Name
-                              };
+                        select new GoalDTO()
+                        {
+                            Id = g.Id,
+                            IsOwnGoal = g.IsOwnGoal,
+                            TimeScored = g.TimeScored,
+                            GamePlayerFirstName = g.GamePlayer.FirstName,
+                            GamePlayerLastName = g.GamePlayer.LastName,
+                            TeamName = g.GamePlayer.Team.Name
+                        };
 
             return goals;
+        }
+
+        public Scores GetGoalsByTeamInGame(int gameId)
+        {
+
+            string teamOneName = null;
+            string teamTwoName = null;
+            int teamOneGoals = 0;
+            int teamTwoGoals = 0;
+
+            var goals = from g in db.Goals
+                        select new GoalDTO()
+                        {
+                            Id = g.Id,
+                            IsOwnGoal = g.IsOwnGoal,
+                            TimeScored = g.TimeScored,
+                            GamePlayerFirstName = g.GamePlayer.FirstName,
+                            GamePlayerLastName = g.GamePlayer.LastName,
+                            TeamName = g.GamePlayer.Team.Name
+                        };
+
+            foreach (var item in goals)
+            {
+                if (gameId == item.GameId)
+                {
+                    if (teamOneName == null)
+                    {
+                        teamOneName = item.TeamName;
+                    }
+                    else if (teamTwoName == null)
+                    {
+                        teamTwoName = item.TeamName;
+                    }
+
+                    if (teamOneName == item.TeamName && item.IsOwnGoal == false)
+                    {
+                        teamOneGoals += 1;
+                    }
+                    else if (teamOneName == item.TeamName && item.IsOwnGoal == true)
+                    {
+                        teamTwoGoals += 1;
+                    }
+                    else if (teamTwoName == item.TeamName && item.IsOwnGoal == false)
+                    {
+                        teamTwoGoals += 1;
+                    }
+                    else if (teamTwoName == item.TeamName && item.IsOwnGoal == false)
+                    {
+                        teamOneGoals += 1;
+                    }
+                }
+
+            }
+
+            var scores = new Scores
+            {
+                TeamOneName = teamOneName,
+                TeamOneGoals = teamOneGoals,
+                TeamTwoName = teamTwoName,
+                TeamTwoGoals = teamTwoGoals
+            };
+
+            //var scoreJson = new JsonSerializer().Serialize(scores);
+            return scores;
+
+        }
+    
+
+        public class Scores{
+            public string TeamOneName;
+            public int TeamOneGoals;
+            public string TeamTwoName;
+            public int TeamTwoGoals;
         }
 
         // GET: api/Goals/5
