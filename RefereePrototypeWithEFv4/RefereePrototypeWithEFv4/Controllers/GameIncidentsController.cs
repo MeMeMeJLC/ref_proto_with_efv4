@@ -26,130 +26,11 @@ namespace RefereePrototypeWithEFv4.Controllers
                                   Id = g.Id,
                                   IncidentType = g.IncidentType,
                                   IncidentTime = g.IncidentTime,
-                                  GameId = g.GamePlayer.GameId,
-                                  GamePlayerId = g.GamePlayerId,
                                   GamePlayerFirstName = g.GamePlayer.FirstName,
                                   GamePlayerLastName = g.GamePlayer.LastName,
-                                  TeamId = g.GamePlayer.TeamId,
                                   TeamName = g.GamePlayer.Team.Name
                               };
             return gameIncidents;
-        }
-
-        public List<GameIncidentDTO> GetGameIncidentsByGameId(int gameId)
-        {
-            var gameIncidents = from g in db.GameIncidents
-                              select new GameIncidentDTO()
-                              {
-                                  Id = g.Id,
-                                  IncidentType = g.IncidentType,
-                                  IncidentTime = g.IncidentTime,
-                                  GameId = g.GamePlayer.GameId,
-                                  GamePlayerId = g.GamePlayerId,
-                                  GamePlayerFirstName = g.GamePlayer.FirstName,
-                                  GamePlayerLastName = g.GamePlayer.LastName,
-                                  TeamId = g.GamePlayer.TeamId,
-                                  TeamName = g.GamePlayer.Team.Name
-                              };
-
-            List<GameIncidentDTO> gameIncidentsByGameId = new List<GameIncidentDTO>();
-
-            foreach (var item in gameIncidents)
-            {
-                if (gameId == item.GameId)
-                {
-                    gameIncidentsByGameId.Add(item);
-                }
-            }
-
-            return gameIncidentsByGameId;
-        }
-
-        public List<GameIncidentDTO> GetGameIncidentsByGamePlayerId(int gamePlayerId)
-        {
-            var gameIncidents = from g in db.GameIncidents
-                                select new GameIncidentDTO()
-                                {
-                                    Id = g.Id,
-                                    IncidentType = g.IncidentType,
-                                    IncidentTime = g.IncidentTime,
-                                    GameId = g.GamePlayer.GameId,
-                                    GamePlayerId = g.GamePlayerId,
-                                    GamePlayerFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerLastName = g.GamePlayer.LastName,
-                                    TeamId = g.GamePlayer.TeamId,
-                                    TeamName = g.GamePlayer.Team.Name
-                                };
-
-            List<GameIncidentDTO> gameIncidentsByGamePlayerId = new List<GameIncidentDTO>();
-
-            foreach (var item in gameIncidents)
-            {
-                if (gamePlayerId == item.GamePlayerId)
-                {
-                    gameIncidentsByGamePlayerId.Add(item);
-                }
-            }
-
-            return gameIncidentsByGamePlayerId;
-        }
-
-        public List<GameIncidentDTO> GetGameIncidentsByTeamId(int teamId)
-        {
-            var gameIncidents = from g in db.GameIncidents
-                                select new GameIncidentDTO()
-                                {
-                                    Id = g.Id,
-                                    IncidentType = g.IncidentType,
-                                    IncidentTime = g.IncidentTime,
-                                    GameId = g.GamePlayer.GameId,
-                                    GamePlayerId = g.GamePlayerId,
-                                    GamePlayerFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerLastName = g.GamePlayer.LastName,
-                                    TeamId = g.GamePlayer.TeamId,
-                                    TeamName = g.GamePlayer.Team.Name
-                                };
-
-            List<GameIncidentDTO> gameIncidentsByTeamId = new List<GameIncidentDTO>();
-
-            foreach (var item in gameIncidents)
-            {
-                if (teamId == item.TeamId)
-                {
-                    gameIncidentsByTeamId.Add(item);
-                }
-            }
-
-            return gameIncidentsByTeamId;
-        }
-
-        public List<GameIncidentDTO> GetGameIncidentsByIncidentType(string incidentType)
-        {
-            var gameIncidents = from g in db.GameIncidents
-                                select new GameIncidentDTO()
-                                {
-                                    Id = g.Id,
-                                    IncidentType = g.IncidentType,
-                                    IncidentTime = g.IncidentTime,
-                                    GameId = g.GamePlayer.GameId,
-                                    GamePlayerId = g.GamePlayerId,
-                                    GamePlayerFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerLastName = g.GamePlayer.LastName,
-                                    TeamId = g.GamePlayer.TeamId,
-                                    TeamName = g.GamePlayer.Team.Name
-                                };
-
-            List<GameIncidentDTO> gameIncidentsByIncidentType = new List<GameIncidentDTO>();
-
-            foreach (var item in gameIncidents)
-            {
-                if (incidentType == item.IncidentType)
-                {
-                    gameIncidentsByIncidentType.Add(item);
-                }
-            }
-
-            return gameIncidentsByIncidentType;
         }
 
         // GET: api/GameIncidents/5
@@ -162,12 +43,8 @@ namespace RefereePrototypeWithEFv4.Controllers
                  Id = b.Id,
                  IncidentType = b.IncidentType,
                  IncidentTime = b.IncidentTime,
-                 GameId = b.GamePlayer.GameId,
-                 GamePlayerId = b.GamePlayer.Id,
                  GamePlayerFirstName = b.GamePlayer.FirstName,
-                 GamePlayerLastName = b.GamePlayer.LastName,
-                 TeamId = b.GamePlayer.TeamId,
-                 TeamName = b.GamePlayer.Team.Name
+                 GamePlayerLastName = b.GamePlayer.LastName
              }).SingleOrDefaultAsync(b => b.Id == id);
 
             if (gameIncident == null)
