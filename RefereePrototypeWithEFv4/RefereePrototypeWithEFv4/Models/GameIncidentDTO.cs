@@ -10,8 +10,11 @@ namespace RefereePrototypeWithEFv4.Models
         public int Id { get; set; }
         public string IncidentType { get; set; }
         public TimeSpan IncidentTime { get; set; }
+        public int GameId { get; set; }
+        public int GamePlayerId { get; set; }
         public string GamePlayerFirstName { get; set; }
         public string GamePlayerLastName { get; set; }
+        public int TeamId { get; set; }
         public string TeamName { get; set; }
     }
 }
