@@ -26,15 +26,10 @@ namespace RefereePrototypeWithEFv4.Controllers
                                 {
                                     Id = g.Id,
                                     SubstitutionTime = g.SubstitutionTime,
-
                                     GamePlayerGoingOffId = g.GamePlayerGoingOffId,
-                                    GamePlayerGoingOffFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerGoingOffLastName = g.GamePlayer.LastName,
-                                    GamePlayerGoingOnId = g.GamePlayerGoingOnId,
-                                    GamePlayerGoingOnFirstName = g.GamePlayer.FirstName,
-                                    GamePlayerGoingOnLastName = g.GamePlayer.LastName,
 
-                                    GameId = g.GamePlayer.GameId,
+                                    GamePlayerGoingOnId = g.GamePlayerGoingOnId,
+
                                     TeamName = g.GamePlayer.Team.Name
                                 };
             return substitutions;
@@ -47,12 +42,11 @@ namespace RefereePrototypeWithEFv4.Controllers
                                 {
                                     Id = g.Id,
                                     SubstitutionTime = g.SubstitutionTime,
-
                                     GamePlayerGoingOffId = g.GamePlayerGoingOffId,
+
                                     GamePlayerGoingOnId = g.GamePlayerGoingOnId,
 
-                                    TeamName = g.GamePlayer.Team.Name,
-                                    GameId = g.GamePlayer.GameId
+                                    TeamName = g.GamePlayer.Team.Name
                                 };
 
             foreach (var item in substitutions)
